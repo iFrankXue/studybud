@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyBud</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/main.css' %}">
 </head>
 <body>
 
@@ -16,7 +20,6 @@
         {% endfor %}
     </ul>
     {% endif %}
-
 
     {% block content %}
 
