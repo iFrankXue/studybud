@@ -65,6 +65,7 @@ def registerPage(request):
     return render(request, 'base/login_register.html', {'form': form})
 
 
+
 def home(request):
 
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -113,7 +114,6 @@ def userProfile(request, pk):
     return render(request, 'base/profile.html', context)
 
 
-
 @login_required(login_url='login')
 def createRoom(request):
     form = RoomForm()
@@ -121,7 +121,9 @@ def createRoom(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False)
+            room.host = request.user
+            room.save()
             return redirect('home')
 
     context = {'form': form}
@@ -144,6 +146,15 @@ def updateRoom(request, pk):
 
     context = {'form': form}
     return render(request, 'base/room_form.html', context)
+
+
+
+# def editUser(request, pk):
+#     user = User.objects.get(id)
+#     # form = 
+
+
+
 
 
 @login_required(login_url='login')
